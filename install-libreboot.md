@@ -15,10 +15,15 @@ flashrom -p host -w libreboot/roms/asus-c201.img.libre-r20160907
 
 ## Revet changes
 
-Boot from USB using Devuan image
+Boot from USB using Devuan image, and insert another drive with the repo contents
 
 ```bash
-apt-get install -y flashrom libftdi1 libpci3
+mkdir /usb
+mount /dev/sdb1 /usb
+dpkg -i /usb/asus-c201/packages libpci3_3.2.1-3_armhf.deb
+dpkg -i /usb/asus-c201/packages libftdi1_0.20-2_armhf.deb
+/usb/asus-c201/pacakges/flashrom -p host -w /usb/asus-c201/libreboot/roms/asus-c201.img.original
+
 ```
 
 ## Unbrick using RPI or BB
